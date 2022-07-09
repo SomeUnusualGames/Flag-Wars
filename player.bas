@@ -53,7 +53,7 @@ End Constructor
 
 Sub UySun.Unload()
     UnloadTexture(This.Texture)
-    UnloadTexture(tHIS.BulletTexture)
+    UnloadTexture(This.BulletTexture)
 End Sub
 
 Sub UySun.Reset()

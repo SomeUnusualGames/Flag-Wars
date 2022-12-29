@@ -37,8 +37,8 @@ End Constructor
 Constructor UySun(TexturePath As String, BulletPath As String, Pos As Vector2, Speed As Single)
     This.Texture = LoadTexture(TexturePath)
     This.BulletTexture = LoadTexture(BulletPath)
-    This.TextureSize = Vector2(This.Texture.width, This.Texture.height)
-    This.Body = Circle(Vector2(Pos.x + This.Texture.width\2, Pos.y + This.Texture.height\2), 20)
+    This.TextureSize = Vector2(This.Texture.width_, This.Texture.height_)
+    This.Body = Circle(Vector2(Pos.x + This.Texture.width_\2, Pos.y + This.Texture.height_\2), 20)
     This.Position = Pos
     This.Speed = Speed
     This.DefaultSpeed = Speed
@@ -65,7 +65,7 @@ Sub UySun.Reset()
     This.GameOver = False
     This.HitTimer = 0.0
     This.Health = 3
-    This.TextureSize = Vector2(This.Texture.width, This.Texture.height)
+    This.TextureSize = Vector2(This.Texture.width_, This.Texture.height_)
 
     For I As Integer = 0 To 999
         This.BulletList(I).Active = False
@@ -73,8 +73,8 @@ Sub UySun.Reset()
 End Sub
 
 Function UySun.OutOfBounds(NewX As Single, NewY As Single) As Boolean
-    Dim As Single RightSide = NewX + This.Texture.width
-    Dim As Single Bottom = NewY + This.Texture.height
+    Dim As Single RightSide = NewX + This.Texture.width_
+    Dim As Single Bottom = NewY + This.Texture.height_
     If (NewX < 0 Or RightSide > GetScreenWidth() Or NewY < 0 Or Bottom > GetScreenHeight()) Then
         Return True
     End If
@@ -91,7 +91,7 @@ Sub UySun.UpdateBullet(Df As Single, BossBody As Circle, ByRef BossHp As Integer
                 This.BulletList(I) = Bullet( _
                     This.Center, 300.0, 300.0, 0.0, -PI/2, _
                     Rectangle(This.Center.x\2 + 30, This.Center.y, 5, 40), _
-                    Rectangle(0, 0, This.BulletTexture.width, This.BulletTexture.height) _
+                    Rectangle(0, 0, This.BulletTexture.width_, This.BulletTexture.height_) _
                 )
                 This.BulletList(I).Active = True
                 This.ActiveBullets = This.ActiveBullets + 1
@@ -182,7 +182,7 @@ Sub UySun.Update(Df As Single)
     End If
     This.Movement(Df)
     This.Center = Vector2( _
-        This.Position.x + This.Texture.width\2, This.Position.y + This.Texture.height\2 _
+        This.Position.x + This.Texture.width_\2, This.Position.y + This.Texture.height_\2 _
     )
     This.Body.Position = This.Center
     If (This.GotHit And This.HitTimer <= 0) Then
@@ -199,10 +199,10 @@ Sub UySun.Draw()
         End If
         This.BulletList(I).Draw(This.BulletTexture)
     Next
-    Dim As Color SunColor = IIf(This.GotHit, RED, WHITE)
+    Dim As RLColor SunColor = IIf(This.GotHit, RED, WHITE)
     DrawTexturePro( _
         This.Texture, _
-        Rectangle(0, 0, This.Texture.width, This.Texture.height), _
+        Rectangle(0, 0, This.Texture.width_, This.Texture.height_), _
         Rectangle(This.Position.x, This.Position.y, This.TextureSize.x, This.TextureSize.y), _
         Vector2(0, 0), _
         0.0, _
@@ -215,6 +215,6 @@ Sub UySun.Draw()
         End If
     Next
     #ifdef DEBUG
-    DrawCircleV(This.Body.Position, This.Body.Radius, Color(55, 0, 0, 120))
+    DrawCircleV(This.Body.Position, This.Body.Radius, RLColor(55, 0, 0, 120))
     #endif
 End Sub

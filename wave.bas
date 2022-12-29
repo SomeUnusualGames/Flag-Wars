@@ -1,18 +1,3 @@
-
-'' Rectángulo donde el sol se va a mover
-'' Tiempo en que el sol se va a mover
-'' Tiempo de la wave
-'' Id de la wave
-
-'' Wave:
-'' Poner spawners de bullets relativos a la posición del sol, 
-'' el cual van a ser los puntos donde salen las bullets.
-'' ...
-
-'' 1.
-''    1. 16 rayos por todo el circulo
-''    2. 
-
 Type BossWave
     Public:
         Declare Constructor()

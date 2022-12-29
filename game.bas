@@ -57,8 +57,8 @@ End Sub
 
 Sub Game.CheckMusicIcon()
     Dim As Rectangle IconRect = Rectangle( _
-        GetScreenWidth()-(This.MusicIcon.width\2)-10, 0, _
-        This.MusicIcon.width\2, This.MusicIcon.height _
+        GetScreenWidth()-(This.MusicIcon.width_\2)-10, 0, _
+        This.MusicIcon.width_\2, This.MusicIcon.height_ _
         )
     Dim As Boolean IconHovered = CheckCollisionPointRec(GetMousePosition(), IconRect)
     If (This.MusicVolume > 0) Then
@@ -72,7 +72,7 @@ End Sub
 
 Sub Game.DrawBackground()
     Dim As Integer Offset = 120
-    Dim As Color LightBlue = Color(116, 172, 223, 255)
+    Dim As RLColor LightBlue = RLColor(116, 172, 223, 255)
     DrawRectangleRec(Rectangle(0, 0, GetScreenWidth(), GetScreenHeight()\2 - Offset), LightBlue)
     DrawRectangleRec(Rectangle(0, GetScreenHeight()\2 + Offset, GetScreenWidth(), GetScreenHeight()\2 - Offset), LightBlue)
 End Sub
@@ -106,11 +106,11 @@ Sub Game.UpdateDraw()
         This.Boss.Draw()
         This.Player.Draw()
         This.Boss.DrawHealth()
-        Dim As Rectangle IconRectSource = Rectangle(0, 0, This.MusicIcon.width\2, This.MusicIcon.height)
-        IconRectSource.x = IIf(MusicVolume > 0, 0, This.MusicIcon.width\2)
+        Dim As Rectangle IconRectSource = Rectangle(0, 0, This.MusicIcon.width_\2, This.MusicIcon.height_)
+        IconRectSource.x = IIf(MusicVolume > 0, 0, This.MusicIcon.width_\2)
         Dim As Rectangle IconRectDest = Rectangle( _
-            GetScreenWidth()-(This.MusicIcon.width\2)-10, 0, _
-            This.MusicIcon.width\2, This.MusicIcon.height _
+            GetScreenWidth()-(This.MusicIcon.width_\2)-10, 0, _
+            This.MusicIcon.width_\2, This.MusicIcon.height_ _
         )
 
         '' UI

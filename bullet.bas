@@ -48,8 +48,8 @@ Sub Bullet.Draw(Texture As Texture2D)
     DrawTexturePro( _
         Texture, _
         This.Origin, _
-        Rectangle(This.Position.x, This.Position.y, Texture.width\2, Texture.height\2), _ 
-        Vector2(Texture.width\2, Texture.height\2), _ 
+        Rectangle(This.Position.x, This.Position.y, Texture.width_\2, Texture.height_\2), _ 
+        Vector2(Texture.width_\2, Texture.height_\2), _ 
         This.Angle * RAD2DEG, _
         WHITE _
     )

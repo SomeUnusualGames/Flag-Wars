@@ -1,1 +1,0 @@
-"Freebasic/fbc64.exe" main.bas -s gui -Wl --subsystem,windows

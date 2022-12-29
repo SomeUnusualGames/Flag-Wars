@@ -76,7 +76,7 @@ Sub Eye.Movement(NewPos As Vector2)
     This.Center = Vector2(NewPos.x + XOffset, NewPos.y + 41)
     This.Rect = Rectangle(_
         NewPos.x + XOffset, NewPos.y + 41, _
-        This.Texture.width, This.Texture.height _
+        This.Texture.width_, This.Texture.height_ _
     )
 End Sub
 '' ---------- Eye Type End ----------
@@ -128,14 +128,14 @@ Constructor ArSun(SunTexture As String, RayTexture As String, EyeTexture As Stri
     This.Position = Pos
     This.TargetPosition = Pos
     This.Body = Circle( _
-        Vector2(Pos.x + This.Texture.width\2, Pos.y + This.Texture.height\2), _
+        Vector2(Pos.x + This.Texture.width_\2, Pos.y + This.Texture.height_\2), _
         50 _
     )
     This.RayRotationSpeed = 1.0
     This.MaxHealth = 900
     This.Health = This.MaxHealth
     This.BulletAngle = 0.0
-    This.TextureSize = Vector2(This.Texture.width, This.Texture.height)
+    This.TextureSize = Vector2(This.Texture.width_, This.Texture.height_)
 
     '' Eyes
     This.LeftEye.Texture = LoadTexture(EyeTexture)
@@ -144,7 +144,7 @@ Constructor ArSun(SunTexture As String, RayTexture As String, EyeTexture As Stri
     This.LeftEye.Center = Vector2(This.Position.x + 32, This.Position.y + 41)
     This.LeftEye.Rect = Rectangle(_
         This.Position.x + 32, This.Position.y + 41, _
-        This.LeftEye.Texture.width, This.LeftEye.Texture.height _
+        This.LeftEye.Texture.width_, This.LeftEye.Texture.height_ _
     )
 
     This.RightEye.Texture = LoadTexture(EyeTexture)
@@ -153,7 +153,7 @@ Constructor ArSun(SunTexture As String, RayTexture As String, EyeTexture As Stri
     This.RightEye.Center = Vector2(This.Position.x + 64, This.Position.y + 41)
     This.RightEye.Rect = Rectangle( _
         This.Position.x + 64, This.Position.y + 41, _
-        This.RightEye.Texture.width, This.RightEye.Texture.height _
+        This.RightEye.Texture.width_, This.RightEye.Texture.height_ _
     )
 
     '' Rays
@@ -162,8 +162,8 @@ Constructor ArSun(SunTexture As String, RayTexture As String, EyeTexture As Stri
     For I As Integer = 0 To RAYCOUNT - 1
         Dim As Single Ang = I * (1/16) * PI '' I * 11.25º
         Dim As Vector2 Pos = Vector2(_
-            This.Position.x + This.Texture.width \ 2 + 83 * Cos(Ang), _
-            This.Position.y + This.Texture.height \ 2 + 82 * Sin(Ang) _
+            This.Position.x + This.Texture.width_ \ 2 + 83 * Cos(Ang), _
+            This.Position.y + This.Texture.height_ \ 2 + 82 * Sin(Ang) _
         )
         Dim As Rectangle OriginRect
         If (I Mod 2 = 0) Then
@@ -219,8 +219,8 @@ Sub ArSun.RotateRays(Df As Single)
         If (This.Rays(i).Angle >= 2*PI) Then
             This.Rays(i).Angle = This.Rays(i).Angle - 2*PI
         End If
-        This.Rays(i).Position.x = This.Position.x + This.Texture.width \ 2 + 83 * Cos(This.Rays(i).Angle)
-        This.Rays(i).Position.y = This.Position.y + This.Texture.height \ 2 + 82 * Sin(This.Rays(i).Angle)
+        This.Rays(i).Position.x = This.Position.x + This.Texture.width_ \ 2 + 83 * Cos(This.Rays(i).Angle)
+        This.Rays(i).Position.y = This.Position.y + This.Texture.height_ \ 2 + 82 * Sin(This.Rays(i).Angle)
     Next
 End Sub
 
@@ -261,7 +261,7 @@ Sub ArSun.CreateBullet()
                 This.BulletList, This.Body.Position, _
                 250.0, 250.0, 0.0, N * (1/8) * PI, _
                 Rectangle(This.Body.Position.x, This.Body.Position.y, 5, 5), _
-                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width, 11) _
+                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width_, 11) _
             )
         Next
     Case 1
@@ -269,7 +269,7 @@ Sub ArSun.CreateBullet()
             This.BulletList, This.Body.Position, _
             250.0, 250.0, 0.0, This.BulletAngle * DEG2RAD, _
             Rectangle(This.Body.Position.x, This.Body.Position.y, 5, 5), _
-            Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width, 11) _
+            Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width_, 11) _
         )
     Case 2
         For N As Integer = 0 To RAYCOUNT
@@ -277,7 +277,7 @@ Sub ArSun.CreateBullet()
                 This.BulletList, This.Body.Position, _
                 250.0, 50.0, -1.0, N * (1/8) * PI, _
                 Rectangle(This.Body.Position.x, This.Body.Position.y, 5, 5), _
-                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width, 11) _
+                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width_, 11) _
             )
         Next
     Case 3
@@ -290,7 +290,7 @@ Sub ArSun.CreateBullet()
                 This.BulletList, This.Body.Position, _
                 250.0, 250.0, 0.0, Angle - (N * PI), _
                 Rectangle(This.Body.Position.x, This.Body.Position.y, 5, 5), _
-                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width, 11) _
+                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width_, 11) _
             )
         Next
     Case 4, 5
@@ -304,7 +304,7 @@ Sub ArSun.CreateBullet()
                 This.BulletList, This.Body.Position, _
                 CurrentSpeed, -200.0, CurrentAcc, This.BulletAngle + (N * PI/4) + (DEG2RAD * GetRandomValue(45, 360)), _
                 Rectangle(This.Body.Position.x, This.Body.Position.y, 5, 5), _
-                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width, 11) _
+                Rectangle(0, RANDOM_SIZE(11), This.RayTexture.width_, 11) _
             )
         Next
     End Select
@@ -331,14 +331,14 @@ Sub ArSun.Update(Df As Single, PlayerBody As Circle, ByRef PlayerHp As Integer, 
         Return
     End If
 
-    This.Body.Position.x = This.Position.x + (This.Texture.width \ 2)
-    This.Body.Position.y = This.Position.y + (This.Texture.height \ 2)
+    This.Body.Position.x = This.Position.x + (This.Texture.width_ \ 2)
+    This.Body.Position.y = This.Position.y + (This.Texture.height_ \ 2)
 
     CurrentWave->MovTimer -= Df
     If (CurrentWave->MovTimer <= 0) Then
         Dim As Rectangle SunRegion = CurrentWave->SunRegion
-        This.TargetPosition.x = GetRandomValue(SunRegion.x, SunRegion.x+SunRegion.width)
-        This.TargetPosition.y = GetRandomValue(SunRegion.y, SunRegion.y+SunRegion.height)
+        This.TargetPosition.x = GetRandomValue(SunRegion.x, SunRegion.x+SunRegion.width_)
+        This.TargetPosition.y = GetRandomValue(SunRegion.y, SunRegion.y+SunRegion.height_)
         CurrentWave->MovTimer = CurrentWave->CurrentMovTimer
     End If
 
@@ -409,7 +409,7 @@ Sub ArSun.Reset()
     This.RightEye.TrackPlayer = True
     This.CurrentStage = 0
     This.CurrentWave = 0
-    This.TextureSize = Vector2(This.Texture.width, This.Texture.height)
+    This.TextureSize = Vector2(This.Texture.width_, This.Texture.height_)
     For I As Integer = 0 To RAYCOUNT
         This.Rays(I).Show = True
     Next
@@ -417,7 +417,7 @@ Sub ArSun.Reset()
     Dim As Const Vector2 Pos = Vector2(555, 310)
     This.Position = Pos
     This.TargetPosition = Pos
-    This.Body.Position = Vector2(Pos.x + This.Texture.width\2, Pos.y + This.Texture.height\2)
+    This.Body.Position = Vector2(Pos.x + This.Texture.width_\2, Pos.y + This.Texture.height_\2)
 
     This.LeftEye.Center = Vector2(Pos.x + 32, Pos.y + 41)
     This.RightEye.Center = Vector2(Pos.x + 64, Pos.y + 41)
@@ -428,17 +428,17 @@ Sub ArSun.Reset()
 End Sub
 
 Sub ArSun.Draw()
-    Dim As Color CurrentColor
+    Dim As RLColor CurrentColor
     Select Case As Const This.CurrentStage
         Case 0
             CurrentColor = WHITE
         Case 1
-            CurrentColor = Color(75, 75, 75, 255)
+            CurrentColor = RLColor(75, 75, 75, 255)
         Case 2
             CurrentColor = BLACK
     End Select
     #ifdef DEBUG
-    DrawRectangleRec(This.StageWaves(This.CurrentWave+(3*This.CurrentStage)).SunRegion, Color(55, 0, 0, 120))
+    DrawRectangleRec(This.StageWaves(This.CurrentWave+(3*This.CurrentStage)).SunRegion, RLColor(55, 0, 0, 120))
     #endif
     '' Rays
     For I As Integer = 0 To RAYCOUNT - 1
@@ -450,9 +450,9 @@ Sub ArSun.Draw()
             This.Rays(I).Origin, _
             Rectangle( _
                 This.Rays(i).Position.x, This.Rays(i).Position.y, _
-                This.Rays(i).Origin.width, This.Rays(i).Origin.height _
+                This.Rays(i).Origin.width_, This.Rays(i).Origin.height_ _
             ), _
-            Vector2(This.Rays(I).Origin.width \ 2, This.Rays(i).Origin.height \ 2), _
+            Vector2(This.Rays(I).Origin.width_ \ 2, This.Rays(i).Origin.height_ \ 2), _
             This.Rays(I).Angle * RAD2DEG, _
             CurrentColor _
         )
@@ -468,7 +468,7 @@ Sub ArSun.Draw()
     '' Body
     DrawTexturePro( _
     This.Texture, _
-        Rectangle(0, 0, This.Texture.width, This.Texture.height), _
+        Rectangle(0, 0, This.Texture.width_, This.Texture.height_), _
         Rectangle(This.Position.x, This.Position.y, This.TextureSize.x, This.TextureSize.y), _
         Vector2(0, 0), _
         0.0, _
@@ -480,9 +480,9 @@ Sub ArSun.Draw()
         BeginScissorMode(This.Position.x + 26, This.Position.y + 38, 13, 7)
         DrawTexturePro( _
             This.LeftEye.Texture, _
-            Rectangle(0, 0, This.LeftEye.Texture.width, This.LeftEye.Texture.height), _
+            Rectangle(0, 0, This.LeftEye.Texture.width_, This.LeftEye.Texture.height_), _
             This.LeftEye.Rect, _
-            Vector2(This.LeftEye.Texture.width \ 2, This.LeftEye.Texture.height \ 2), _
+            Vector2(This.LeftEye.Texture.width_ \ 2, This.LeftEye.Texture.height_ \ 2), _
             0.0, _
             WHITE _
         )
@@ -490,9 +490,9 @@ Sub ArSun.Draw()
         BeginScissorMode(This.Position.x + 58, This.Position.y + 38, 13, 7)
         DrawTexturePro( _
             This.RightEye.Texture, _
-            Rectangle(0, 0, This.RightEye.Texture.width, This.RightEye.Texture.height), _
+            Rectangle(0, 0, This.RightEye.Texture.width_, This.RightEye.Texture.height_), _
             This.RightEye.Rect, _
-            Vector2(This.RightEye.Texture.width \ 2, This.RightEye.Texture.height \ 2), _
+            Vector2(This.RightEye.Texture.width_ \ 2, This.RightEye.Texture.height_ \ 2), _
             0.0, _
             WHITE _
         )
@@ -500,7 +500,7 @@ Sub ArSun.Draw()
     End If
 
     #ifdef DEBUG
-    DrawCircleV(This.Body.Position, This.Body.Radius, Color(55, 0, 0, 120))
+    DrawCircleV(This.Body.Position, This.Body.Radius, RLColor(55, 0, 0, 120))
     #endif
 End Sub
 

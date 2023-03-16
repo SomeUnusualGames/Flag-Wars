@@ -14,3 +14,11 @@ FreeBASIC version used: `FreeBASIC Compiler - Version 1.08.1 (2021-07-05), built
 
 Depends on:
 * [Raylib](https://raylib.com)
+
+# Building
+
+* Install [FreeBASIC](https://www.freebasic.net/) and add it to your PATH.
+
+* Download and build [raylib v4.2](https://github.com/raysan5/raylib/releases/tag/4.2.0)
+
+* Build the game with `make`

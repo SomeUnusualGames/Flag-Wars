@@ -19,6 +19,6 @@ Depends on:
 
 * Install [FreeBASIC](https://www.freebasic.net/) and add it to your PATH.
 
-* Download and build [raylib v4.2](https://github.com/raysan5/raylib/releases/tag/4.2.0)
+* Download and build [raylib v5.0](https://github.com/raysan5/raylib/releases/tag/5.0)
 
 * Build the game with `make`

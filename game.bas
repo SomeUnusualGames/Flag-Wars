@@ -84,7 +84,7 @@ Sub Game.UpdateDraw()
             This.Paused = Not This.Paused
         End If
 
-        If (IsKeyPressed(KEY_R) And This.Player.GameOver Or This.Boss.Health <= 0) Then
+        If IsKeyPressed(KEY_R) And (This.Player.GameOver Or CBool(This.Boss.Health <= 0)) Then
             This.Reset()
             Continue While
         End If
